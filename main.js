@@ -1,6 +1,5 @@
 /* ================================================
-   main.js — UniMarket
-   Universidad del Magdalena
+   main.js — UniMarket Universidad del Magdalena
    ================================================ */
 
 // ==================== VIEW SWITCHING ====================
@@ -10,6 +9,14 @@ function showView(name) {
   if (target) {
     target.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Si la vista es la búsqueda móvil, hacemos focus automático en el input
+    if(name === 'search') {
+      setTimeout(() => {
+        const searchInput = document.getElementById('mobile-search-input');
+        if(searchInput) searchInput.focus();
+      }, 100);
+    }
   }
 }
 
@@ -22,7 +29,7 @@ function verProducto(cardElement) {
   const price = priceNode ? priceNode.nodeValue.trim() : "$0";
   
   let seller = cardElement.querySelector('.card-seller').textContent;
-  seller = seller.replace(/🌟|📚|💻|📓/g, '').trim();
+  seller = seller.replace(/🌟|📚|💻|📓|🍕|🛍️/g, '').trim();
 
   document.getElementById('detail-title').textContent = title;
   document.getElementById('detail-price').textContent = price;
