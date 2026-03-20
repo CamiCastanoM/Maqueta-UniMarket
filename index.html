@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniMarket — Universidad del Magdalena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-logo" onclick="showView('home')">
+    <div class="logo-icon">🛍️</div>
+    UniMarket
+  </div>
+
+  <div class="navbar-search">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/>
+      <path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" placeholder="Buscar productos, comida, libros...">
+  </div>
+
+  <div class="navbar-actions">
+    <button class="btn-nav-link" onclick="showView('publish')">Publicar</button>
+    <button class="btn-nav-link" onclick="showView('home')">Mis compras</button>
+    <button class="btn-primary"  onclick="showView('publish')">Iniciar sesión</button>
+    <button class="nav-icon-btn">🔔</button>
+    <button class="nav-icon-btn">👤</button>
+    <button class="hamburger nav-icon-btn" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</nav>
+
+<div id="view-home" class="view active">
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="#" onclick="showView('home')">Inicio</a>
+      <span>›</span>
+      <span>Venta Flash</span>
+    </div>
+
+    <div class="page-header">
+      <div>
+        <div class="flash-title">⚡ Venta Flash</div>
+        <div class="flash-subtitle">Ofertas especiales por tiempo limitado. <strong>¡Aprovecha ahora!</strong></div>
+      </div>
+      <div class="countdown">
+        <div>
+          <div class="countdown-label">Renueva en:</div>
+          <div class="countdown-time">
+            <div class="time-block" id="hours">02</div>
+            <span class="time-sep">h</span>
+            <div class="time-block" id="minutes">14</div>
+            <span class="time-sep">m</span>
+            <div class="time-block" id="seconds">32</div>
+            <span class="time-sep">s</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-layout">
+      <div class="home-main">
+
+        <div class="cat-pills">
+          <button class="cat-pill active" data-target="all">🛒 Todas</button>
+          <button class="cat-pill" data-target="comida">Comida</button>
+          <button class="cat-pill" data-target="libros">Libros</button>
+          <button class="cat-pill" data-target="tecnologia">Tecnología</button>
+          <button class="cat-pill" data-target="ropa">Ropa</button>
+          <button class="cat-pill" data-target="otros">Otros</button>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-left" id="resultados-count">Mostrando 8 de 132 resultados</div>
+          <select class="sort-select">
+            <option>Más recientes</option>
+            <option>Más vendidos</option>
+            <option>Menor precio</option>
+            <option>Mayor precio</option>
+          </select>
+        </div>
+
+        <div class="products-grid">
+
+          <div class="product-card" data-cat="comida" onclick="verProducto(this)">
+            <div class="badge-discount">-25%</div>
+            <img class="card-img" src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400&h=200&fit=crop" alt="Cheesecake casero">
+            <div class="card-body">
+              <div class="card-title">Cheesecake casero</div>
+              <div class="card-price">$3,000 <span class="card-price-old">$4,000</span></div>
+              <div class="card-seller">🌟 Judith Pasteles</div>
+              <button class="btn-aprovechar">Aprovechar</button>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="comida" onclick="verProducto(this)">
+            <div class="badge-discount">-30%</div>
+            <img class="card-img" src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&h=200&fit=crop" alt="Galletas artesanales">
+            <div class="card-body">
+              <div class="card-title">Galletas artesanales</div>
+              <div class="card-price">$2,500 <span class="card-price-old">$3,500</span></div>
+              <div class="card-seller">🌟 Juan SweetsCup</div>
+              <button class="btn-aprovechar">Aprovechar</button>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="comida" onclick="verProducto(this)">
+            <div class="badge-discount">-20%</div>
+            <img class="card-img" src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=200&fit=crop" alt="Combo almuerzo">
+            <div class="card-body">
+              <div class="card-title">Combo almuerzo universitario</div>
+              <div class="card-price">$8,000 <span class="card-price-old">$10,000</span></div>
+              <div class="card-seller">🌟 Sabor Caribe</div>
+              <button class="btn-aprovechar" onclick="event.stopPropagation(); showView('store')">Ver Tienda</button>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="libros" onclick="verProducto(this)">
+            <div class="badge-discount">-35%</div>
+            <img class="card-img" src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=200&fit=crop" alt="Libro de Biología">
+            <div class="card-body">
+              <div class="card-title">Libro de Biología universitario</div>
+              <div class="card-price">$25,000 <span class="card-price-old">$38,000</span></div>
+              <div class="card-seller">📚 Libros Económicos</div>
+              <button class="btn-aprovechar">Aprovechar</button>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="ropa" onclick="verProducto(this)">
+            <div class="badge-discount">-15%</div>
+            <img class="card-img" src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=200&fit=crop" alt="Camisa Unimag">
+            <div class="card-body">
+              <div class="card-title">Camisa Unimag oficial</div>
+              <div class="card-price">$22,000 <span class="card-price-old">$26,000</span></div>
+              <div class="card-seller">🌟 Street Style Unimag</div>
+              <button class="btn-aprovechar">Aprovechar</button>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="tecnologia" onclick="verProducto(this)">
+            <div class="badge-discount">-18%</div>
+            <img class="card-img" src="https://images.unsplash.com/photo-1606741965326-cb990ae01bb2?w=400&h=200&fit=crop" alt="Audífonos">
+            <div class="card-body">
+              <div class="card-title">Audífonos inalámbricos</div>
+              <div class="card-price">$90,000 <span class="card-price-old">$110,000</span></div>
+              <div class="card-seller">💻 Tech Campus</div>
+              <button class="btn-aprovechar">Aprovechar</button>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="comida" onclick="verProducto(this)">
+            <div class="badge-discount">-20%</div>
+            <img class="card-img" src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=200&fit=crop" alt="Postres del día">
+            <div class="card-body">
+              <div class="card-title">Postres del día</div>
+              <div class="card-price">$5,000 <span class="card-price-old">$7,000</span></div>
+              <div class="card-seller">🌟 Andrea Dulces</div>
+              <button class="btn-aprovechar">Aprovechar</button>
+            </div>
+          </div>
+
+          <div class="product-card" data-cat="otros" onclick="verProducto(this)">
+            <div class="badge-discount">-22%</div>
+            <img class="card-img" src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=200&fit=crop" alt="Cuaderno universitario">
+            <div class="card-body">
+              <div class="card-title">Cuaderno universitario</div>
+              <div class="card-price">$6,000 <span class="card-price-old">$7,700</span></div>
+              <div class="card-seller">📓 Papelería Unimag</div>
+              <button class="btn-aprovechar">Aprovechar</button>
+            </div>
+          </div>
+
+        </div></div><div class="home-sidebar">
+        <div class="sidebar-title">¿Cómo funciona?</div>
+
+        <div class="how-step">
+          <div class="step-icon yellow">🛒</div>
+          <div class="step-text">
+            <strong>Elige tu oferta</strong>
+            <span>Explora y selecciona</span>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-icon green">📞</div>
+          <div class="step-text">
+            <strong>Contacta al vendedor</strong>
+            <span>Acordar encuentro en campus</span>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="step-icon blue">📦</div>
+          <div class="step-text">
+            <strong>Recibe tu producto</strong>
+            <span>Compra segura y rápida</span>
+          </div>
+        </div>
+
+        <hr class="sidebar-divider">
+
+        <div class="solo-hoy">
+          <strong>⚡ Solo hoy</strong>
+          <span>No te pierdas las ofertas!</span>
+        </div>
+        <button class="btn-ofertas-ant">Ver ofertas anteriores</button>
+      </div></div></div><footer>
+    <div class="footer-logo">🛍️ UniMarket</div>
+    <div class="footer-links">
+      <a href="#">Sobre UniMarket</a>
+      <a href="#">Ayuda</a>
+      <a href="#">Contacto</a>
+      <a href="#">Términos y condiciones</a>
+    </div>
+    <div class="footer-copy">UniMarket © 2026 — Universidad del Magdalena</div>
+  </footer>
+</div><div id="view-product" class="view">
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="#" onclick="showView('home')">Inicio</a>
+      <span>›</span>
+      <span>Detalle</span>
+      <span>›</span>
+      <span id="breadcrumb-product-name">Audífonos inalámbricos</span>
+    </div>
+
+    <div class="product-detail-layout">
+
+      <div class="product-gallery">
+        <div class="gallery-main">
+          <img id="main-gallery-img"
+               src="https://images.unsplash.com/photo-1606741965326-cb990ae01bb2?w=700&h=400&fit=crop"
+               alt="Audífonos">
+          <button class="fav-btn">🤍</button>
+        </div>
+        <div class="gallery-thumbs">
+          <div class="thumb active" onclick="changeImg(this,'https://images.unsplash.com/photo-1606741965326-cb990ae01bb2?w=700&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1606741965326-cb990ae01bb2?w=200&h=150&fit=crop" alt="">
+          </div>
+          <div class="thumb" onclick="changeImg(this,'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=700&h=400&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=200&h=150&fit=crop" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="product-info-panel">
+        <div class="product-info-title" id="detail-title">Audífonos inalámbricos</div>
+        <div class="product-info-price" id="detail-price">$90,000</div>
+
+        <div class="seller-card">
+          <div class="seller-avatar">UM</div>
+          <div>
+            <div class="seller-name" id="detail-seller">Carlos Martínez</div>
+            <div class="stars">
+              ★★★★<span style="color:var(--gray-200)">★</span>
+              <span class="stars-text">(38 reseñas)</span>
+            </div>
+            <div class="seller-sub" style="cursor:pointer; color:var(--primary)" onclick="showView('store')">Ver tienda</div>
+          </div>
+        </div>
+
+        <div class="product-desc">
+          Producto publicado en UniMarket. El vendedor asegura que se encuentra en excelentes condiciones. Listo para entrega en el campus de la Universidad del Magdalena.
+        </div>
+
+        <div class="product-tags">
+          <div class="product-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Estado: Excelente
+          </div>
+          <div class="product-tag">
+            <svg class="loc-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Retiro en Universidad del Magdalena
+          </div>
+        </div>
+
+        <button class="btn-comprar" onclick="alert('¡Has contactado al vendedor para coordinar la entrega en el campus!')">Contactar vendedor</button>
+
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Compra segura
+          </div>
+          <div class="trust-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Entrega en campus
+          </div>
+        </div>
+      </div></div><div class="more-products">
+      <div class="section-title">Más opciones del vendedor</div>
+      <div class="more-tabs">
+        <button class="more-tab active" data-target="all">Todo</button>
+        <button class="more-tab" data-target="tech">💻 Tecnología</button>
+        <button class="more-tab" data-target="otros">✨ Otros</button>
+      </div>
+      <div class="mini-grid" id="mini-productos-grid">
+        <div class="mini-card" data-cat="tech">
+          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=200&fit=crop" alt="">
+          <div class="mini-card-body">
+            <div class="mini-title">Disco duro externo</div>
+            <div class="mini-price">$100,000</div>
+            <div class="mini-seller">⭐ Murto Omez</div>
+            <button class="btn-ver">Ver producto</button>
+          </div>
+        </div>
+        <div class="mini-card" data-cat="otros">
+          <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=200&fit=crop" alt="">
+          <div class="mini-card-body">
+            <div class="mini-title">Stickers personalizados</div>
+            <div class="mini-price">$5,000</div>
+            <div class="mini-seller">⭐ Ana Gómez</div>
+            <button class="btn-ver">Ver producto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><footer>
+    <div class="footer-logo">🛍️ UniMarket</div>
+    <div class="footer-links">
+      <a href="#">Sobre UniMarket</a><a href="#">Ayuda</a><a href="#">Contacto</a><a href="#">Términos</a>
+    </div>
+    <div class="footer-copy">UniMarket © 2026 — 🎓 Universidad del Magdalena</div>
+  </footer>
+</div><div id="view-store" class="view">
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="#" onclick="showView('home')">Inicio</a>
+      <span>›</span>
+      <span>Tiendas</span>
+      <span>›</span>
+      <span>Sabor Caribe</span>
+    </div>
+
+    <div class="store-hero" style="margin-top:12px">
+      <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=1200&h=300&fit=crop" alt="Banner Sabor Caribe">
+    </div>
+
+    <div class="store-info">
+      <div class="store-logo">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=200&h=200&fit=crop" alt="Logo Sabor Caribe">
+      </div>
+      <div class="store-meta">
+        <div class="store-name">
+          Sabor Caribe
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="store-cat">Comida rápida universitaria</div>
+        <div class="store-desc">Deliciosa comida rápida preparada para ti en el corazón de la Universidad del Magdalena. ¡El mejor sabor caribeño cerca de tus clases!</div>
+        <div class="store-status"><div class="dot-green"></div> Abierto ahora</div>
+      </div>
+      <button class="btn-blue" style="margin-left:auto">Contactar tienda</button>
+    </div>
+
+    <div class="store-layout">
+
+      <div class="store-sidebar">
+        <div class="filter-title">Filtros de categoría</div>
+        <div class="filter-item" style="background:var(--gray-100); color:var(--primary);">
+          <div class="fi-icon">🛒</div>
+          <span>Todo</span>
+        </div>
+        <div class="filter-item">
+          <div class="fi-icon">🚀</div>
+          <span>Entrega rápida</span>
+        </div>
+        <div class="filter-item">
+          <div class="fi-icon">🍳</div>
+          <span>Recién preparados</span>
+        </div>
+      </div>
+
+      <div class="store-main">
+        <div class="cat-pills">
+          <button class="cat-pill active">🛒 Todo</button>
+          <button class="cat-pill">🍔 Hamburguesas</button>
+          <button class="cat-pill">🌭 Perros calientes</button>
+        </div>
+
+        <div class="section-title">Productos de Sabor Caribe</div>
+        <div class="products-grid">
+
+          <div class="product-card" onclick="verProducto(this)">
+            <img class="card-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=200&fit=crop" alt="Hamburguesa">
+            <div class="card-body">
+              <div class="card-title">Hamburguesa especial</div>
+              <div class="card-price">$12,000</div>
+              <div class="card-seller">Sabor Caribe</div>
+              <button class="btn-aprovechar">Aprovechar</button>
+            </div>
+          </div>
+
+          <div class="product-card" onclick="verProducto(this)">
+            <img class="card-img" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=200&fit=crop" alt="Combo">
+            <div class="card-body">
+              <div class="card-title">Combo almuerzo completo</div>
+              <div class="card-price">$15,000</div>
+              <div class="card-seller">Sabor Caribe</div>
+              <button class="btn-aprovechar">Aprovechar</button>
+            </div>
+          </div>
+
+        </div></div></div></div><footer>
+    <div class="footer-logo">🛍️ UniMarket</div>
+    <div class="footer-links">
+      <a href="#">Sobre UniMarket</a><a href="#">Ayuda</a><a href="#">Contacto</a>
+    </div>
+    <div class="footer-copy">UniMarket © 2026 — Universidad del Magdalena</div>
+  </footer>
+</div><div id="view-publish" class="view">
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="#" onclick="showView('home')">Inicio</a>
+      <span>›</span>
+      <span>Registrar nuevo producto</span>
+    </div>
+
+    <div class="form-header" style="padding-top:20px">
+      <div class="form-main-title">Registrar nuevo producto</div>
+      <div class="form-subtitle">Publica un artículo en el mercado de la Universidad del Magdalena.</div>
+    </div>
+
+    <div class="publish-layout">
+
+      <div class="publish-form-col">
+        <div class="form-card">
+
+          <div class="tip-box">
+            💡 <span><strong>Consejo: Buenas fotos</strong> y descripción detallada atraen más ventas en la U.</span>
+          </div>
+
+          <div class="steps-list">
+            <div class="step-item active"><div class="step-num">1</div> Fotos</div>
+            <div class="step-item"><div class="step-num">2</div> Detalles</div>
+            <div class="step-item"><div class="step-num">3</div> Precio</div>
+          </div>
+
+          <div class="section-subtitle">Fotos del producto</div>
+          <div class="field-hint">ℹ️ Mínimo una foto clara. Sube hasta 5 fotos.</div>
+
+          <div class="photo-grid">
+            <div class="photo-upload main">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="3"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+              + Subir imágenes
+            </div>
+            <div class="photo-upload"><span style="font-size:1.2rem">+</span><span>Añadir foto</span></div>
+            <div class="photo-upload"><span style="font-size:1.2rem">+</span><span>Añadir foto</span></div>
+          </div>
+
+          <div class="upload-drop" style="margin-bottom:20px">
+            Arrastra y suelta o haz clic para subir imágenes
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Título del producto</label>
+            <input type="text" id="pub-title" class="form-input" placeholder="Ej. Libro de cálculo">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Descripción</label>
+            <textarea class="form-input" placeholder="Describe tu producto, estado y por qué le interesa a otros estudiantes."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Precio (COP)</label>
+            <input type="number" id="pub-price" class="form-input" placeholder="Ej. 25000">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Ubicación / Punto de entrega</label>
+            <input type="text" class="form-input" placeholder="Ej. Cafetería central, Bloque A, etc.">
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-cancel" onclick="showView('home')">Cancelar</button>
+            <button class="btn-siguiente" onclick="showView('home')">Publicar Producto →</button>
+          </div>
+
+        </div></div><div class="publish-preview-col">
+        <div class="preview-card">
+          <div class="section-subtitle" style="margin-bottom:12px">Vista previa</div>
+          <div style="background:var(--gray-100);border-radius:var(--radius-sm);height:160px;display:flex;align-items:center;justify-content:center;color:var(--gray-400);font-size:0.85rem;margin-bottom:12px">
+            Aquí aparecerá tu foto
+          </div>
+          <div class="preview-title" id="prev-title">Título del producto</div>
+          <div class="preview-price" id="prev-price">$0</div>
+          <div class="preview-seller">
+            <div class="seller-avatar" style="width:34px;height:34px;font-size:0.85rem">TU</div>
+            <div>
+              <div style="font-size:0.83rem;font-weight:600">Estudiante Unimagdalena</div>
+            </div>
+          </div>
+          <button class="btn-comprar" style="margin-top:16px">Comprar ahora</button>
+        </div>
+      </div></div></div></div><nav class="mobile-nav">
+  <ul>
+    <li class="active" onclick="showView('home'); setMobileActive(this)">
+      <span style="font-size:1.2rem">🏠</span><span>Inicio</span>
+    </li>
+    <li onclick="showView('home'); setMobileActive(this)">
+      <span style="font-size:1.2rem">🔍</span><span>Buscar</span>
+    </li>
+    <li onclick="showView('publish'); setMobileActive(this)">
+      <span style="font-size:1.4rem">➕</span><span>Publicar</span>
+    </li>
+    <li onclick="showView('home'); setMobileActive(this)">
+      <span style="font-size:1.2rem">👤</span><span>Perfil</span>
+    </li>
+  </ul>
+</nav>
+
+<script src="scripts/main.js"></script>
+</body>
+</html>
